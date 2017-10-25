@@ -1,7 +1,8 @@
 #include "Physicalshape.h"
 #include <math.h>
+#include <iostream>
 
-Physicalshape::Physicalshape(double x, double y)
+Physicalshape::Physicalshape(double x, double y) : x(x), y(y)
 {
 }
 
@@ -30,24 +31,13 @@ Circle::Circle(double x, double y, double radius) : Physicalshape(x, y), radius(
 
 bool Circle::isColliding(Rectangle * rectangle)
 {
-	double dx = std::abs(this->x - rectangle->x);
-	double dy = std::abs(rectangle->y - this->y);
-	float cornerDistance;
-	
-	if (dx > (this->radius  + rectangle->width/2))shape.setFillColor(sf::Color::Green); return false;
-	if (dy > (this->radius  + rectangle->heigth/2))rect.setFillColor(sf::Color::Blue); return false;
+	std::cout << "is colling test\n";
+	int deltaX = x - fmax(rectangle->GetX(), fmin(x, rectangle->GetX() + rectangle->width));
+	int deltaY = y - fmax(rectangle->GetY(), fmin(y, rectangle->GetY() + rectangle->heigth));
 
-	if (dx <= (rectangle->width / 2))
-	{
-		shape.setFillColor(sf::Color::Red); return true;
-}
-	if (dy <= (rectangle->heigth / 2)) rect.setFillColor(sf::Color::Red); return true;
+	std::cout << "radius = " << radius << ",x " << x << ", y " << y << "\n";
 
-	cornerDistance = pow(dx - rectangle->width / 2.0f, 2.0f) +
-		pow(dy - rectangle->heigth / 2.0f, 2.0f);
-
-	return(cornerDistance <= pow(this->radius, 2.0f));
-	
+	return (deltaX*deltaX + deltaY*deltaY) < pow(radius, 2);
 }
 
 void Circle::draw(sf::RenderWindow & window)
@@ -81,6 +71,8 @@ void Circle::move()
 
 
 	shape.setPosition(shape.getPosition() + speed*delta_move);
+	x = shape.getPosition().x;
+	y = shape.getPosition().y;
 }
 
 Rectangle::Rectangle(double x, double y, double width, double heigth) :Physicalshape(x, y), width(width), heigth(heigth)
@@ -97,4 +89,14 @@ Rectangle::~Rectangle()
 void Rectangle::draw(sf::RenderWindow & window)
 {
 	window.draw(rect);
+}
+
+double Rectangle::GetX()
+{
+	return y;
+}
+
+double Rectangle::GetY()
+{
+	return y;
 }

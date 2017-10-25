@@ -37,6 +37,8 @@ public:
 	sf::RectangleShape rect;
 	double width;
 	double heigth;
+	double GetX();
+	double GetY();
 
 };
 

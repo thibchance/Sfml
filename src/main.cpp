@@ -12,8 +12,10 @@ int main()
 	
 	Circle * shape =   new Circle(50, 20,50);
 	Rectangle* rect = new Rectangle(200, 200, 100, 100);
+	shape->shape.setFillColor(sf::Color::Green);
+	rect->rect.setFillColor(sf::Color::Blue);
 
-	 
+	
 
 
 		while (window.isOpen())
@@ -29,7 +31,17 @@ int main()
 					shape->move();
 				}
 			}
-			shape->isColliding(rect);
+			if (shape->isColliding(rect))
+			{
+				shape->shape.setFillColor(sf::Color::Red);
+				rect->rect.setFillColor(sf::Color::Red);
+			}
+			else
+			{
+				shape->shape.setFillColor(sf::Color::Green);
+				rect->rect.setFillColor(sf::Color::Blue);
+				std::cout << "test";
+			}
 			
 			
 			window.clear();
