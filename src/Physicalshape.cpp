@@ -52,19 +52,20 @@ void Circle::move()
 	sf::Vector2f delta_move;
 	float speed = 5.0f;
 	//manage input
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && x>0)
 	{
+
 		delta_move.x -= 1.0f;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& x<400)
 	{
 		delta_move.x += 1.0f;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&& y>0)
 	{
 		delta_move.y -= 1.0f;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)&& y<400)
 	{
 		delta_move.y += 1.0f;
 	}
